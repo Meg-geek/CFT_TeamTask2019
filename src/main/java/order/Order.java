@@ -6,6 +6,9 @@ import java.util.Map;
 public interface Order {
     void addItem(Item item);
     Map<Item, Integer> getItems();
-    void removeItem(Item item);
+    //remove fixed amount of Items
+    void removeItems(Item item, int amount);
+    //remove ALL items
+    void removeItems(Item item);
     double getItemsSum();
 }

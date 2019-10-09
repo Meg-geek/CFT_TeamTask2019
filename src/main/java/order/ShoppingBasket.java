@@ -22,25 +22,45 @@ public class ShoppingBasket implements Order {
     @ManyToOne
     private Customer customer;
 
-    private Map<Item, Integer> items;
+    /*
+    * Если отображать на базу данных, то я сделала бы
+    * таблицу Order-Item со столбцами:
+    * orderID, itemID, amount
+    * где orderID, itemID - внешние ключи,
+    * amount - количество товара данной категории
+    * */
+    private Map<Item, Integer> itemsMap;
 
     public ShoppingBasket(){
-        items = new HashMap<>();
+        itemsMap = new HashMap<>();
     }
 
+    @Override
     public void addItem(Item item) {
-        items.merge(item, 1, Integer::sum);
+        itemsMap.merge(item, 1, Integer::sum);
     }
 
+    @Override
     public Map<Item, Integer> getItems() {
-        return items;
+        return itemsMap;
     }
 
-    public void removeItem(Item item) {
+    @Override
+    public void removeItems(Item item, int amount) {
 
     }
 
+    @Override
+    public void removeItems(Item item) {
+        itemsMap.remove(item);
+    }
+
+    @Override
     public double getItemsSum() {
+        double sum = 0;
+        for(Map.Entry<Item, Integer> itemAmount : itemsMap.entrySet()){
+            sum+=itemAmount.getKey().getPrice()*itemAmount.getValue();
+        }
         return 0;
     }
 }

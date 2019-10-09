@@ -15,6 +15,7 @@ public class Product implements Item {
     @Column
     private double price;
 
+    @Override
     public double getPrice() {
         return price;
     }
@@ -27,6 +28,7 @@ public class Product implements Item {
         name = newName;
     }
 
+    @Override
     public String getName() {
         return name;
     }
