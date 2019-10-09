@@ -1,12 +1,11 @@
 package order;
 
 import item.Item;
-
-import java.util.List;
+import java.util.Map;
 
 public interface Order {
     void addItem(Item item);
-    List<Item>  getItems();
-    void deleteItem(Item item);
+    Map<Item, Integer> getItems();
+    void removeItem(Item item);
     double getItemsSum();
 }
