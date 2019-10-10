@@ -53,7 +53,7 @@ public class MiniShop implements Shop {
         Pair<Item, Integer> itemIntPair = null;
         boolean itemEnded = false;
         for(Map.Entry<Item, Integer> itemAmount: itemAmountMap.entrySet()){
-            if(itemAmount.getKey().getName().equals(itemName)){
+            if(itemAmount.getKey().getName().equalsIgnoreCase(itemName)){
                 Item item = itemAmount.getKey();
                 int oldValue = itemAmount.getValue();
                 if(oldValue < amount){
