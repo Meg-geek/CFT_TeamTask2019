@@ -47,7 +47,13 @@ public class ShoppingBasket implements Order {
 
     @Override
     public void removeItems(Item item, int amount) {
-
+        Integer curAmount = itemsMap.get(item);
+        if(curAmount != null && curAmount > amount){
+            itemsMap.replace(item, curAmount, curAmount - amount);
+        }
+        if(curAmount != null && curAmount == amount){
+            removeItems(item);
+        }
     }
 
     @Override
@@ -62,5 +68,25 @@ public class ShoppingBasket implements Order {
             sum+=itemAmount.getKey().getPrice()*itemAmount.getValue();
         }
         return 0;
+    }
+
+    public int getId(){
+        return id;
+    }
+
+    public Customer getCustomer(){
+        return customer;
+    }
+
+    public void setCustomer(Customer customer){
+        this.customer = customer;
+    }
+
+    public Date getDate(){
+        return date;
+    }
+
+    public void setDate(Date date){
+        this.date = date;
     }
 }
