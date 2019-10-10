@@ -36,8 +36,8 @@ public class ShoppingBasket implements Order {
     }
 
     @Override
-    public void addItem(Item item) {
-        itemsMap.merge(item, 1, Integer::sum);
+    public void addItem(Item item, int amount) {
+        itemsMap.merge(item, amount, Integer::sum);
     }
 
     @Override
@@ -46,19 +46,20 @@ public class ShoppingBasket implements Order {
     }
 
     @Override
-    public void removeItems(Item item, int amount) {
+    public boolean removeItems(Item item, int amount) {
         Integer curAmount = itemsMap.get(item);
         if(curAmount != null && curAmount > amount){
-            itemsMap.replace(item, curAmount, curAmount - amount);
+            return itemsMap.replace(item, curAmount, curAmount - amount);
         }
         if(curAmount != null && curAmount == amount){
-            removeItems(item);
+            return removeItems(item);
         }
+        return false;
     }
 
     @Override
-    public void removeItems(Item item) {
-        itemsMap.remove(item);
+    public boolean removeItems(Item item) {
+        return (itemsMap.remove(item) != null);
     }
 
     @Override
