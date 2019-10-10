@@ -3,6 +3,7 @@ package customer;
 import item.Item;
 import order.Order;
 import shop.Shop;
+import util.Pair;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -119,20 +120,4 @@ public class User implements Customer {
     }
 }
 
-class Pair<L, R>{
-    private L left;
-    private R right;
 
-    Pair(L l, R r){
-        left = l;
-        right = r;
-    }
-
-    public L getLeft(){
-        return left;
-    }
-
-    public R getRight(){
-        return right;
-    }
-}

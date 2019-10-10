@@ -51,7 +51,7 @@ public class ShoppingBasket implements Order {
         if(curAmount != null && curAmount > amount){
             return itemsMap.replace(item, curAmount, curAmount - amount);
         }
-        if(curAmount != null && curAmount == amount){
+        if(curAmount != null){
             return removeItems(item);
         }
         return false;

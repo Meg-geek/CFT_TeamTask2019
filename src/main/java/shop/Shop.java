@@ -3,12 +3,12 @@ package shop;
 import customer.Customer;
 import item.Item;
 import order.Order;
-
-import java.util.List;
-import java.util.Map;
+import shop.shopException.ShopException;
+import util.Pair;
 
 public interface Shop {
     Order createOrder(Customer customer);
-    List<Item> getItems();
-    Item getItem(String itemName);
+    //List<String> getItemsNames();
+    Pair<Item, Integer> getItem(String itemName, int amount) throws ShopException;
+    void returnItem(Item item, int amount);
 }

@@ -10,7 +10,8 @@ public interface Order {
     * remove fixed amount of Items
     * @param item item to remove
     * @param amount amount of item to remove
-    * @return {@code true} if the fixed amount of item was removed
+    * @return {@code true} if the fixed amount or all amount
+    *  of item was removed
     * */
     boolean removeItems(Item item, int amount);
     /*
