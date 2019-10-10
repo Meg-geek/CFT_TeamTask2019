@@ -36,8 +36,8 @@ public class ShoppingBasket implements Order {
     }
 
     @Override
-    public void addItem(Item item, int amount) {
-        itemsMap.merge(item, amount, Integer::sum);
+    public boolean addItem(Item item, int amount) {
+        return (itemsMap.merge(item, amount, Integer::sum) != null);
     }
 
     @Override

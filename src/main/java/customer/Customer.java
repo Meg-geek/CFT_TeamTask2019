@@ -11,10 +11,10 @@ public interface Customer {
 
     Order createOrder(Shop shop);
     Order getCurOrder();
-    void addItemInOrder(Item item, int amount);
+    boolean addItemInOrder(Item item, int amount);
     //remove fixed amount
-    void removeItemInOrder(Item item, int amount);
+    boolean removeItemInOrder(Item item, int amount);
     //remove all item products
-    void removeItemInOrder(Item item);
+    boolean removeItemInOrder(Item item);
     Order makeOrder();
 }

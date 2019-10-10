@@ -1,6 +1,5 @@
 package customer;
 
-import com.sun.tools.javac.util.Pair;
 import item.Item;
 import order.Order;
 import shop.Shop;
@@ -24,10 +23,11 @@ public class User implements Customer {
 
     @Column
     private String patronymic;
-
+//?
     private List<Pair<Order, Shop>> orderShopList;
 
     private Shop curShop;
+    private Order curOrder;
 
     public User(){
         orderShopList = new ArrayList<>();
@@ -72,43 +72,67 @@ public class User implements Customer {
 
     @Override
     public Order createOrder(Shop shop) {
-        if(curShop == null){
+        if(curOrder == null){
             curShop = shop;
-            Order order = curShop.createOrder(this);
-            orderShopList.add(new Pair<>(order, shop));
-            return order;
+            curOrder = curShop.createOrder(this);
+            orderShopList.add(new Pair<>(curOrder, shop));
+            return curOrder;
         }
         return null;
     }
 
     @Override
     public Order getCurOrder() {
-        if(curShop == null){
-            return null;
+        return curOrder;
+    }
+
+    @Override
+    public boolean addItemInOrder(Item item, int amount) {
+        if(curOrder != null){
+            return curOrder.addItem(item, amount);
         }
-        if(orderShopList.size() > 0){
-            return orderShopList.get(orderShopList.size() - 1).fst;
+        return false;
+    }
+
+    @Override
+    public boolean removeItemInOrder(Item item, int amount) {
+        if(curOrder != null){
+            return curOrder.removeItems(item, amount);
         }
-        return null;
+        return false;
     }
 
     @Override
-    public void addItemInOrder(Item item, int amount) {
-
-    }
-
-    @Override
-    public void removeItemInOrder(Item item, int amount) {
-
-    }
-
-    @Override
-    public void removeItemInOrder(Item item) {
-
+    public boolean removeItemInOrder(Item item) {
+        if(curOrder != null){
+            return curOrder.removeItems(item);
+        }
+        return false;
     }
 
     @Override
     public Order makeOrder() {
+        Order madeOrder = curOrder;
+        curOrder = null;
+        curShop = null;
+        return madeOrder;
+    }
+}
 
+class Pair<L, R>{
+    private L left;
+    private R right;
+
+    Pair(L l, R r){
+        left = l;
+        right = r;
+    }
+
+    public L getLeft(){
+        return left;
+    }
+
+    public R getRight(){
+        return right;
     }
 }

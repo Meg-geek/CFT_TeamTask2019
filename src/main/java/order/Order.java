@@ -4,7 +4,7 @@ import item.Item;
 import java.util.Map;
 
 public interface Order {
-    void addItem(Item item, int amount);
+    boolean addItem(Item item, int amount);
     Map<Item, Integer> getItems();
     /*
     * remove fixed amount of Items
