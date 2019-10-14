@@ -77,7 +77,7 @@ public class MiniShop implements Shop {
 
     @Override
     public void returnItem(Item item, int amount) {
-        if( itemAmountMap.containsKey(item)){
+        if(!itemAmountMap.containsKey(item)){
             itemAmountMap.put(item, amount);
         } else {
             itemAmountMap.replace(item, itemAmountMap.get(item) + amount);

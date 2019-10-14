@@ -1,5 +1,5 @@
 package consoleUserManager;
 
-public class UserManager {
-
+public interface UserManager {
+    void start();
 }

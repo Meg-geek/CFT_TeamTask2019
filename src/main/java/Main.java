@@ -1,10 +1,9 @@
+import consoleUserManager.ConsoleUserManager;
 import item.Item;
 import item.Product;
 import shop.MiniShop;
-import shop.Shop;
 
 import java.io.*;
-import java.nio.file.Path;
 
 public class Main {
     private static final String catalogFilePath = "src" + File.separator +
@@ -15,7 +14,8 @@ public class Main {
         MiniShop shop = new MiniShop();
         try{
             if (addItems(shop)){
-
+                ConsoleUserManager userManager = new ConsoleUserManager(shop);
+                userManager.start();
             }
 
         }catch(IOException ex){

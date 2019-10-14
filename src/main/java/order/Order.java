@@ -1,6 +1,8 @@
 package order;
 
 import item.Item;
+
+import java.util.Date;
 import java.util.Map;
 
 public interface Order {
@@ -21,4 +23,6 @@ public interface Order {
     * */
     boolean removeItems(Item item);
     double getItemsSum();
+    int getId();
+    Date getDate();
 }

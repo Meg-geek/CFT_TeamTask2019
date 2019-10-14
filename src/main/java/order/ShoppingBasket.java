@@ -10,11 +10,14 @@ import javax.persistence.ManyToOne;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @Entity
 public class ShoppingBasket implements Order {
     @Id
     private int id;
+
+    private static AtomicInteger atomicId = new AtomicInteger(0);
 
     @Column
     private Date date;
@@ -33,6 +36,8 @@ public class ShoppingBasket implements Order {
 
     public ShoppingBasket(){
         itemsMap = new HashMap<>();
+        date = new Date();
+        id = atomicId.getAndIncrement();
     }
 
     @Override
@@ -68,9 +73,10 @@ public class ShoppingBasket implements Order {
         for(Map.Entry<Item, Integer> itemAmount : itemsMap.entrySet()){
             sum+=itemAmount.getKey().getPrice()*itemAmount.getValue();
         }
-        return 0;
+        return sum;
     }
 
+    @Override
     public int getId(){
         return id;
     }
@@ -83,6 +89,7 @@ public class ShoppingBasket implements Order {
         this.customer = customer;
     }
 
+    @Override
     public Date getDate(){
         return date;
     }
