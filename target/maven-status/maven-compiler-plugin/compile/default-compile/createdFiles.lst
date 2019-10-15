@@ -1,0 +1,12 @@
+util\Pair.class
+Main.class
+customer\Customer.class
+item\Product.class
+order\ShoppingBasket.class
+shop\Shop.class
+consoleUserManager\ConsoleUserManager.class
+customer\User.class
+consoleUserManager\UserManager.class
+order\Order.class
+shop\MiniShop.class
+item\Item.class
