@@ -4,7 +4,6 @@ import customer.Customer;
 import customer.User;
 import item.Item;
 import order.Order;
-import order.ShoppingBasket;
 import shop.Shop;
 import util.Pair;
 
@@ -31,15 +30,15 @@ public class ConsoleUserManager implements UserManager{
         String line;
         do{
             createOrder();
-            System.out.println("Если хотите сделать еще заказ, введите да");
+            System.out.println("If you want to make another order, enter yes");
             line = consoleScaner.nextLine();
-        }while(line.equals("да"));
+        } while(line.equals("yes"));
     }
 
     private void createOrder(){
         System.out.println("Enter the name of item from catalog and " +
                 "amount of item that you need." + System.lineSeparator() +
-                "If you want to see your order, enter"+ SHOW_ORDER_INFO +"," + System.lineSeparator() +
+                "If you want to see your order, enter "+ SHOW_ORDER_INFO +"," + System.lineSeparator() +
                 "If you want to make an order, enter " + MAKE_ORDER);
         Order order = user.createOrder(shop);
         String line = consoleScaner.nextLine();
@@ -51,7 +50,7 @@ public class ConsoleUserManager implements UserManager{
             }
             line = consoleScaner.nextLine();
         }
-
+        user.makeOrder();
     }
 
     private void addToOrder(String line, Order order){
@@ -62,6 +61,10 @@ public class ConsoleUserManager implements UserManager{
         }
         try{
             int amount = Integer.parseInt(itemInfo[1]);
+            if(amount < 0){
+                System.out.println("Incorrect amount of item, try again");
+                return;
+            }
             Pair<Item, Integer> items = shop.getItem(itemInfo[0], amount);
             if(items == null){
                 System.out.println("Shop doesn't have " + itemInfo[0]);

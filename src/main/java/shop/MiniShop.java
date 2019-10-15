@@ -38,18 +38,11 @@ public class MiniShop implements Shop {
         return order;
     }
 
-
-    //@Override
-    private List<String> getItemsNames() {
-        List <String> names = new ArrayList<>();
-        for(Map.Entry<Item, Integer> itemAmount: itemAmountMap.entrySet()){
-            names.add(itemAmount.getKey().getName());
-        }
-        return names;
-    }
-
     @Override
     public Pair<Item, Integer> getItem(String itemName, int amount){
+        if(amount < 0){
+            return null;
+        }
         Pair<Item, Integer> itemIntPair = null;
         boolean itemEnded = false;
         for(Map.Entry<Item, Integer> itemAmount: itemAmountMap.entrySet()){

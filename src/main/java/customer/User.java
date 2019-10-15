@@ -24,7 +24,7 @@ public class User implements Customer {
 
     @Column
     private String patronymic;
-//?
+
     private List<Pair<Order, Shop>> orderShopList;
 
     private Shop curShop;
